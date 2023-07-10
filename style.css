@@ -13,3 +13,11 @@ h1, h2, h3{
     margin: 0 auto;
     padding: 15px;
 }
+.wrapper{
+    background-color: rgba(135, 226, 226, 0.267);
+}
+.brand, .doors, .price, .maxSpeed{
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.568);
+    border: 1px solid black;
+}
