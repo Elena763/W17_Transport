@@ -1,3 +1,5 @@
+let wrapper = document.getElementById("wrapper");
+//Создаем класс Transport
 class Transport {
     constructor(type, price, brand) {
       this.type = type;
@@ -5,14 +7,14 @@ class Transport {
       this.brand = brand;
     }
     getInfo() {
-      return `Информация: ${this.type}, ${this.brand}`
+      return `${this.type}`, `${this.brand}`
     }
 
     getPrice() {
-        return `Цена: ${this.price} рублей`
+        return `${this.price}`
     }
-  }
-
+}
+//Создаем класс Car, который наследует от Transport
 class Car extends Transport {
   constructor(type, price, brand, doors) {
     super(type, price, brand);
@@ -23,10 +25,10 @@ class Car extends Transport {
   getDoorsCount = this.getDoorsCount.bind(this);
 
   getDoorsCount() {
-    return `Кол-во дверей: ${this.doors}`;
+    return `${this.doors}`;
   }
 }
-
+//Создаем класс Bike, который наследует от Transport
 class Bike extends Transport {
   constructor(type, price, brand, maxSpeed) {
     super(type, price, brand);
@@ -38,6 +40,54 @@ class Bike extends Transport {
   getMaxSpeed = this.getMaxSpeed.bind(this);
 
   getMaxSpeed() {
-    return `Макс. скорость: ${this.maxSpeed} км/ч`;
+    return `${this.maxSpeed}`;
   }
 }
+//Создаем пустые массивы
+let cars = [];
+let bikes = [];
+//Заполняем массивы из объекта
+for (item of data) {
+    if (item.type === 'car') {
+      cars.push(new Car(item.type, item.price, item.brand, item.doors));
+    }
+    if (item.type === 'bike') {
+      bikes.push(new Bike(item.type, item.price, item.brand, item.maxSpeed));
+    }
+}
+console.log(cars);
+console.log(bikes);
+//Функция вывода информации
+function outputInfo(){
+cars.forEach(element => {
+  let newP = document.createElement('p');
+  newP.innerHTML = `<p class="brand" id="brand"></p>
+  <p class="doors" id="doors"></p>
+  <p class="price" id="price"></p>`;
+  wrapper.prepend(newP);
+
+  let brandTransport = document.getElementById("brand");
+  let priceTransport = document.getElementById("price");
+  let doorsCar = document.getElementById("doors");
+
+  brandTransport.textContent = `${"Марка: " + element.brand}`;
+  priceTransport.textContent = `${"Цена: " + element.price + " рублей"}`;
+  doorsCar.textContent = `${"Кол-во дверей: " + element.doors + " шт."}`;
+});
+bikes.forEach(element => {
+  let newP = document.createElement('p');
+  newP.innerHTML = `<p class="brand" id="brand"></p>
+  <p class="price" id="price"></p>
+  <p class="maxSpeed" id="maxSpeed"></p>`;
+  wrapper.prepend(newP);
+
+  let brandTransport = document.getElementById("brand");
+  let priceTransport = document.getElementById("price");
+  let speedBike = document.getElementById("maxSpeed");
+
+  brandTransport.textContent = `${"Марка: " + element.brand}`;
+  priceTransport.textContent = `${"Цена: " + element.price + " рублей"}`;
+  speedBike.textContent = `${"Максимальная скорость: " + element.maxSpeed + " км/ч"}`;
+});
+};
+outputInfo();
